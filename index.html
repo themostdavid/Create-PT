@@ -3,15 +3,15 @@
 <body>
 Hahahahahahahahaha
 
-<p id = "ANDRIY">My name is Andriy.</p>
+<p id = "demo">My name is Andriy.</p>
 
-<button id = "notAndriy" onclick="notAndriy()">Make it not andriy.</button>
+<button id = "notAndriy" onclick="document.getElementbyId("demo").innerHTML = "My name is not Andriy";">Make it not andriy.</button>
 
 <script>
 //HI
 function notAndriy()
 {
-  document.getElementbyId("ANDRIY").innerHTML = "My name is not Andriy";
+  document.getElementbyId("demo").innerHTML = "My name is not Andriy";
 }
 </script>
 
