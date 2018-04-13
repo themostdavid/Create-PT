@@ -1,4 +1,4 @@
-var gameBoard 
+var gameBoard =
 {
 	//dimensions of game board
 	width : 0,
