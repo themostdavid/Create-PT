@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-Help pls.
-</head>
+    <head>
+        <title id="title">Minesweeper!</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
 
-<body>
+    <body>
 
-<h2 id="title">JavaScript in Head</h2>
+    <h2 id="heading">Minesweeper!</h2>
 
-<p id="demo">A Paragraph.</p>
+    <p id="demo">Welcome to Minesweeper! Your objective is to indentify
+        all mines on the play board. Left-clicking a square will reveal a
+        number, indicating how many mines lie in the squares surrounding that
+        square. Right-click a square to indicate you believe there is a mine there.
+        Flag all mines to win!
+    </p>
 
-<button type="button" onclick="changeParagraph()">Change "A Paragraph." hahahahaha</button>
-<button type="button" onclick="changeTitle()">Change title to your funny meme</button>
+    <p id="nFlags">Number of flags: 100</p>
+    <button type="button" onclick="changeFlagCount(-1)">Flag count -1</button>
+    <button type="button" onclick="changeFlagCount(1)">Flag count +1</button>
 
- <script src="js/main.js"></script>
+    
 
-</body>
+    </body>
+
+    <script src="js/main.js"></script>
+    
 </html> 
