@@ -13,13 +13,16 @@ var game =
     nFlags : 100
 };
 
-var cell =
+var cellStatus =
 {
     //0 means safe, 1 means mine
-    mineStatus : 0,
+    mine : 0,
 
     //0 means hidden, 1 means revealed
-    visualStatus : 0,
+    visual : 0,
+
+    //Number of surrounding squares with mines
+    nearby : 0
 };
 
 //Changes value of flag count

@@ -1,1 +1,20 @@
+#heading
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #000000;
+    font-size: 72px;
+}
 
+#desc
+{
+    text-align: center;
+}
+
+#button
+{
+    height: 200px;
+    width: 200px;
+    font-size: 12px;
+}
