@@ -3,8 +3,8 @@ var game =
     gameBoard:
     {
         //dimensions of game board
-        width : 0,
-        height : 0,
+        width : 30,
+        height : 16,
         
         //Game board array
         board : []
