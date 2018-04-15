@@ -14,7 +14,20 @@
 
 #button
 {
-    height: 200px;
-    width: 200px;
+    height: 20px;
     font-size: 12px;
+}
+
+.row div
+{
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background: #d3d3d3;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
 }
