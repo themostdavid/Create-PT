@@ -7,16 +7,20 @@
     font-size: 72px;
 }
 
-#desc
+body > p
 {
-    text-align: center;
+	text-align: center;
+	color: #0000AA;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 
-#button
+.buttonHolder
 {
     height: 20px;
     font-size: 12px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+	text-align: center;
 }
 
 .row div
@@ -28,14 +32,13 @@
     margin-left: 0px;
     margin-top: 0px;
     background: #d3d3d3;
-    border-block-start-width: 4px;
-    /*Border color doesn't work*/
-    border-block-end-color: blue;
     box-sizing: border-box;
-    cursor: pointer;
 }
 
-/*#board
+#board div
 {
-    Learn how to center the board
-}*/
+	cursor: crosshair;
+	text-align: center;
+	border: 5px solid red;
+}
+
