@@ -35,10 +35,15 @@ body > p
     box-sizing: border-box;
 }
 
-#board div
+#board
 {
 	cursor: crosshair;
+	margin-left: auto;
+	margin-right: auto;
+	width: 900px;
 	text-align: center;
-	border: 5px solid red;
+	padding: 5px;
+	border: 5px solid blue;
+	/*width: 1000px;
+	margin-left: 100px;*/
 }
-
