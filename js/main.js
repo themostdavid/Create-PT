@@ -1,3 +1,5 @@
+var count = 0;
+
 var game =
 {
     gameBoard:
@@ -25,16 +27,39 @@ var game =
                 }
             }
 			
-			document.getElementById("testArray").innerHTML = "Output: " + game.gameBoard.grid[1][14][1];
+			document.getElementById("testArray").innerHTML = "Output " + count + " is " + game.gameBoard.grid[1][count][1];
+			count++;
         }
     },
 
     nFlags : 100
 };
 
+function changeDifficulty(level)
+{
+	if(level == 0)
+	{
+		game.gameBoard.width = 9;
+		game.gameBoard.height = 9;
+		console.log("Difficulty = Beginner");
+	}
+	else if(level == 1)
+	{
+		game.gameBoard.width = 16;
+		game.gameBoard.height = 16;
+		console.log("Difficulty = Medium");
+	}
+	else if(level == 2)
+	{
+		game.gameBoard.width = 30;
+		game.gameBoard.height = 16;
+		console.log("Difficulty = Hard");
+	}
+}
+
 var cellStatus =
 {
-    //0 means safe, 1 means 2
+    //0 means safe, 1 means unsafe
     mine : 0,
 
     //0 means hidden, 1 means revealed
