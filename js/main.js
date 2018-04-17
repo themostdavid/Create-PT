@@ -7,7 +7,18 @@ var game =
         height : 16,
         
         //Game board array
-        board : []
+        //Should each cell be its own array, to store cellStatus?
+        createBoard: function()
+        {
+            //creates rows
+            for(var i = 0; i < height; i++)
+            {
+                for(var k = 0; k < width; k++)
+                {
+                    
+                }
+            }
+        }
     },
 
     nFlags : 100
