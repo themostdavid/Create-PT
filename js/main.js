@@ -7,17 +7,25 @@ var game =
         height : 16,
         
         //Game board array
+		grid : [],
         //Should each cell be its own array, to store cellStatus?
         createBoard: function()
         {
+			console.log("createBoard entered.");
             //creates rows
-            for(var i = 0; i < height; i++)
+            for(var i = 0; i < game.gameBoard.height; i++)
             {
-                for(var k = 0; k < width; k++)
+				var row = new Array();
+				game.gameBoard.grid[i] = row;
+				//creates cells
+                for(var k = 0; k < game.gameBoard.width; k++)
                 {
-                    
+					var cell = new Array("HH", 2);
+                    row[k] = cell;
                 }
             }
+			
+			document.getElementById("testArray").innerHTML = "Output: " + game.gameBoard.grid[1][14][1];
         }
     },
 
@@ -26,7 +34,7 @@ var game =
 
 var cellStatus =
 {
-    //0 means safe, 1 means mine
+    //0 means safe, 1 means 2
     mine : 0,
 
     //0 means hidden, 1 means revealed
