@@ -11,6 +11,7 @@ function formatGameBoard()
 	
 	//Sets up border of game board
 	document.getElementById("gameBoard").style.border = "5px solid #939393";
+	document.getElementById("gameBoard").style.background = "#a5a5a5";
 }
 
 function populateGameBoard()
