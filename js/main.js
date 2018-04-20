@@ -1,5 +1,43 @@
 var count = 0;
 
+//Checks surrounding cells for mines
+function checkSurroundingCells()
+{
+	var nRow;
+	var nCell;
+	
+	for(nRow = 0; nRow < game.gameBoard.height; nRow++)
+	{
+		for(nCell = 0; nCell < game.gameBoard.width; nCell++)
+		{
+			if(game.gameBoard.grid[nRow][nCell][1] == 1)
+			{
+				game.gameBoard.grid[nRow][nCell][2] = 0;
+			}
+}
+
+
+//Sets up the cell arrays
+function setUpCells()
+{
+	var randomRow;
+	var randomCell;
+	
+	while(game.nMines != 0)
+	{
+		randomRow = Math.floor(Math.random() * (game.gameBoard.height-1));
+		randomCell = Math.floor(Math.random() * (game.gameBoard.width-1));
+		
+		if(game.gameBoard.grid[randomRow][randomCell][1] != 1)
+		{
+			game.gameBoard.grid[randomRow][randomCell][1] = 1;
+			game.nMines--;
+		}
+	}
+	
+	checkSurroundingCells();
+}
+
 function formatGameBoard()
 {
 	//Sets proper width of gameBoard
@@ -14,6 +52,7 @@ function formatGameBoard()
 	document.getElementById("gameBoard").style.background = "#a5a5a5";
 }
 
+//Creates html board
 function populateGameBoard()
 {
 	console.log("populateGameBoard entered");
@@ -58,7 +97,7 @@ var game =
         createBoard: function()
         {
             
-            game.gameBoard.grid = [];
+            this.deleteBoard();
 			console.log("createBoard entered.");
             //creates rows
             for(var i = 0; i < game.gameBoard.height; i++)
@@ -69,18 +108,18 @@ var game =
                 for(var k = 0; k < game.gameBoard.width; k++)
                 {
                     //cell[0]: 0-hidden 1-revealed; cell[1]: 0-safe 1-mine; cell[2] tells number of nearby mines
-					var cell = new Array(0, (count-1), 0);
+					var cell = new Array(0, 0, 0);
                     row[k] = cell;
                 }
             }
+			setUpCells();
+			console.log(this.grid);
 			
-			document.getElementById("testArray").innerHTML = "Output " + count + " is " + game.gameBoard.grid[1][count][1];
-			count++;
         },
 		
 		deleteBoard: function()
 		{
-			
+			game.gameBoard.grid = [];
 		}
     },
 
@@ -95,32 +134,34 @@ function changeDifficulty(level)
 	{
 		game.gameBoard.width = 9;
         game.gameBoard.height = 9;
-        game.gameBoard.nMines = 10;
-        //game.gameBoard.createBoard();
+        game.nMines = 10;
+        game.gameBoard.createBoard();
 		console.log("Difficulty = Beginner");
 	}
 	else if(level == 1)
 	{
 		game.gameBoard.width = 16;
         game.gameBoard.height = 16;
-        game.gameBoard.nMines = 32;
-        //game.gameBoard.createBoard();
+        game.nMines = 32;
+        game.gameBoard.createBoard();
 		console.log("Difficulty = Medium");
 	}
 	else if(level == 2)
 	{
 		game.gameBoard.width = 30;
         game.gameBoard.height = 16;
-        game.gameBoard.nMines = 100;
-        //game.gameBoard.createBoard();
+        game.nMines = 100;
+        game.gameBoard.createBoard();
 		console.log("Difficulty = Hard");
 	}
+	populateGameBoard();
 }
 
 var cellStatus =
 {
     //0 means safe, 1 means unsafe
-    mine : 0,
+    MINE : 0,
+	SAFE : 1,
 
     //0 means hidden, 1 means revealed
     visual : 0,
