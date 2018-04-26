@@ -47,3 +47,29 @@ body > p
 	/*width: 1000px;
 	margin-left: 100px;*/
 }
+
+.mine
+{
+	display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+	margin-right: 5px;
+    margin-top: 0px;
+    background: #00AA00;
+    box-sizing: border-box;
+}
+
+.bomb
+{
+	display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+	margin-right: 5px;
+    margin-top: 0px;
+    background: #AA0000;
+    box-sizing: border-box;
+}
