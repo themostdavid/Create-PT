@@ -1,4 +1,115 @@
-var count = 0;
+var a = 0;
+
+//Updates cell arrays after one is clicked
+function updateCells(rowId, cellId, cellDiv)
+{
+	var nRowId = parseInt(rowId);
+	var nCellId = parseInt(cellId);
+	var total = nRowId+nCellId;
+
+	console.log(total);
+	if(game.gameBoard.grid[nRowId][nCellId][0] = 1)
+	{
+	}
+	else if(game.gameBoard.grid[nRowId][nCellId][1] = 1)
+	{
+		game.gameBoard.grid[nRowId][nCellId][0] = 1;
+		mine.appendChild(cellDiv);
+	}
+	else if(game.gameBoard.grid[nRowId][nCellId][1] = 0)
+	{
+		game.gameBoard.grid[nRowId][nCellId][0] = 1;
+		safe.appendChild(cellDiv);
+	}
+	console.log(game.gameBoard.grid);
+}
+
+//events using jquery
+function setUpEvents()
+{
+	$(".cell").on("click", function(e)
+	{
+		testFunction();
+		var myparent = $(e.target).parent();
+		var rowId = myparent.attr("id");
+		var cellId = e.target.id;
+		var cellDiv = e.target;
+		
+		var test = rowId+cellId;
+		
+		console.log("Row id: " + rowId + "\nCell id: " + cellId);
+		console.log(test);
+		
+		updateCells(rowId, cellId, cellDiv);
+	});
+
+}
+
+//Checks surrounding cells for mines
+function checkSurroundingCells()
+{
+	var nRow;
+	var nCell;
+	var count = 0;
+
+	console.log("checkSurroundingCells entered.")
+	
+	for(nRow = 0; nRow < game.gameBoard.height; nRow++)
+	{
+		for(nCell = 0; nCell < game.gameBoard.width; nCell++)
+		{
+			count = 0;
+			if(game.gameBoard.grid[nRow][nCell][1] == 1)
+			{
+				game.gameBoard.grid[nRow][nCell][2] = 0;
+			}
+			else
+			{
+				//Checks surrounding cells with nested loops
+				for(var h = -1; h <= 1; h++)
+				{
+					for(var j = -1; j <= 1; j++)
+					{
+						//Checks to see if row exists, then if cell exists, then the mine status of the cell
+						if((game.gameBoard.grid[nRow+h]) && (game.gameBoard.grid[nRow+h][nCell+j]) && (game.gameBoard.grid[nRow+h][nCell+j][1] == 1))
+						{
+							count++;
+						}
+					}
+				}
+				game.gameBoard.grid[nRow][nCell][2] = count;
+			}
+			
+		}
+	}
+}
+
+
+//Sets up the cell arrays
+function setUpCells()
+{
+	var randomRow;
+	var randomCell;
+	
+	console.log("setUpCells entered");
+	console.log(game.nMines);
+	
+	while(game.nMines != 0)
+	{
+		console.log("loop entered");
+		randomRow = Math.floor(Math.random() * (game.gameBoard.height-1));
+		randomCell = Math.floor(Math.random() * (game.gameBoard.width-1));
+		
+		if(game.gameBoard.grid[randomRow][randomCell][1] != 1) 
+		{
+			//console.log("Bomb placed");
+			game.gameBoard.grid[randomRow][randomCell][1] = 1;
+			game.nMines--;
+		}
+	}
+	
+	checkSurroundingCells();
+}
 
 function formatGameBoard()
 {
@@ -14,9 +125,11 @@ function formatGameBoard()
 	document.getElementById("gameBoard").style.background = "#a5a5a5";
 }
 
+//Creates html board
 function populateGameBoard()
 {
 	console.log("populateGameBoard entered");
+	game.gameBoard.createBoard();
 	
 	while(gameBoard.firstChild)
 	{
@@ -37,11 +150,16 @@ function populateGameBoard()
 			cellElement.classList.add("cell");
 			
 			rowElement.appendChild(cellElement);
+		
+			
         }
 		
 		gameBoard.appendChild(rowElement);
     }
+	
 	formatGameBoard();
+	//jquery event handlers for cells
+	setUpEvents();
 }
 
 var game =
@@ -58,7 +176,7 @@ var game =
         createBoard: function()
         {
             
-            game.gameBoard.grid = [];
+            this.deleteBoard();
 			console.log("createBoard entered.");
             //creates rows
             for(var i = 0; i < game.gameBoard.height; i++)
@@ -69,18 +187,18 @@ var game =
                 for(var k = 0; k < game.gameBoard.width; k++)
                 {
                     //cell[0]: 0-hidden 1-revealed; cell[1]: 0-safe 1-mine; cell[2] tells number of nearby mines
-					var cell = new Array(0, (count-1), 0);
+					var cell = new Array(0, 0, 0);
                     row[k] = cell;
                 }
             }
+			setUpCells();
+			console.log(this.grid);
 			
-			document.getElementById("testArray").innerHTML = "Output " + count + " is " + game.gameBoard.grid[1][count][1];
-			count++;
         },
 		
 		deleteBoard: function()
 		{
-			
+			game.gameBoard.grid = [];
 		}
     },
 
@@ -95,39 +213,53 @@ function changeDifficulty(level)
 	{
 		game.gameBoard.width = 9;
         game.gameBoard.height = 9;
-        game.gameBoard.nMines = 10;
-        //game.gameBoard.createBoard();
+        game.nMines = 10;
 		console.log("Difficulty = Beginner");
 	}
 	else if(level == 1)
 	{
 		game.gameBoard.width = 16;
         game.gameBoard.height = 16;
-        game.gameBoard.nMines = 32;
-        //game.gameBoard.createBoard();
+        game.nMines = 32;
 		console.log("Difficulty = Medium");
 	}
 	else if(level == 2)
 	{
 		game.gameBoard.width = 30;
         game.gameBoard.height = 16;
-        game.gameBoard.nMines = 100;
-        //game.gameBoard.createBoard();
+        game.nMines = 100;
 		console.log("Difficulty = Hard");
 	}
+	populateGameBoard();
 }
 
 var cellStatus =
 {
     //0 means safe, 1 means unsafe
-    mine : 0,
+    SAFE : 0,
+	MINE : 1,
 
     //0 means hidden, 1 means revealed
-    visual : 0,
-
-    //Number of surrounding squares with mines
-    nearby : 0
+	HIDDEN : 0,
+	SHOWN : 1
 };
+
+function testFunction()
+{
+	console.log("testFunction entered");
+	
+	if(a == 0)
+	{
+		document.getElementById("heading").style.color = "#FF0000";
+		a = 1;
+	}
+	else
+	{
+		document.getElementById("heading").style.color = "#00FF00";
+		a = 0;
+	}
+	
+}
 
 //Changes value of flag count
 function changeFlagCount(x)
