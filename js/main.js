@@ -6,6 +6,9 @@ function updateCells(rowId, cellId, cellDiv)
 	var nRowId = parseInt(rowId);
 	var nCellId = parseInt(cellId);
 	var total = nRowId+nCellId;
+	
+	var nearbyMines = "" + game.gameBoard.grid[nRowId][nCellId][2];
+	var node = document.createTextNode(nearbyMines);
 
 	console.log(total);
 	if(game.gameBoard.grid[nRowId][nCellId][0] == 1)
@@ -21,6 +24,7 @@ function updateCells(rowId, cellId, cellDiv)
 	{
 		game.gameBoard.grid[nRowId][nCellId][0] = 1;
 		cellDiv.classList.add("safe");
+		cellDiv.appendChild(node);
 	}
 	console.log(game.gameBoard.grid);
 }
