@@ -8,18 +8,19 @@ function updateCells(rowId, cellId, cellDiv)
 	var total = nRowId+nCellId;
 
 	console.log(total);
-	if(game.gameBoard.grid[nRowId][nCellId][0] = 1)
+	if(game.gameBoard.grid[nRowId][nCellId][0] == 1)
 	{
+		console.log("Cell already clicked.");
 	}
-	else if(game.gameBoard.grid[nRowId][nCellId][1] = 1)
+	else if(game.gameBoard.grid[nRowId][nCellId][1] == 1)
 	{
 		game.gameBoard.grid[nRowId][nCellId][0] = 1;
-		mine.appendChild(cellDiv);
+		cellDiv.classList.add("mine");
 	}
-	else if(game.gameBoard.grid[nRowId][nCellId][1] = 0)
+	else if(game.gameBoard.grid[nRowId][nCellId][1] == 0)
 	{
 		game.gameBoard.grid[nRowId][nCellId][0] = 1;
-		safe.appendChild(cellDiv);
+		cellDiv.classList.add("safe");
 	}
 	console.log(game.gameBoard.grid);
 }
