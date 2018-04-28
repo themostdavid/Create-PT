@@ -1,4 +1,44 @@
-var a = 0;
+function gameOver()
+{
+	var p = document.createElement("p");
+	p.id = "gameOverText";
+	p.style.textAlign = "center";
+
+	var gameOverDiv = document.getElementById("gameOverDiv");
+
+	gameOverDiv.appendChild(p);
+	p.innerHTML = "Too bad! You clicked a mine.  Click a difficulty below to start a new game.";
+	/*gameOverDiv.style.height = "400px";
+	gameOverDIv.style.width = "600px";*/
+	gameOverDiv.style.background = "#cfcfcf";
+
+}
+
+//Reveals nearby squares
+function revealNearbyCells(nRowId, nCellId)
+{
+	for(var h = -1; h <= 1; h++)
+		{
+			for(var j = -1; j <= 1; j++)
+			{
+				//Checks to see if row exists, then if cell exists, then the mine status of the cell
+				if((game.gameBoard.grid[nRowId+h]) && (game.gameBoard.grid[nRowId+h][nCellId+j])
+					&& (game.gameBoard.grid[nRowId+h][nCellId+j][0] == cellStatus.HIDDEN))
+				{
+					if(game.gameBoard.grid[nRowId+h][nCellId+j][2] == 0)
+					{
+						game.gameBoard.grid[nRowId+h][nCellId+j][0] == cellStatus.SHOWN;
+						revealNearbyCells((nRowId+h), (nCellId+j));
+					}
+					else
+					{
+						//How do I get the cellDiv of the surrounding cell
+						updateCells((nRowId+h), (nCellId+j));
+					}
+				}
+			}
+		}
+}
 
 //Updates cell arrays after one is clicked
 function updateCells(rowId, cellId, cellDiv)
@@ -10,19 +50,25 @@ function updateCells(rowId, cellId, cellDiv)
 	var nearbyMines = "" + game.gameBoard.grid[nRowId][nCellId][2];
 	var node = document.createTextNode(nearbyMines);
 
-	console.log(total);
-	if(game.gameBoard.grid[nRowId][nCellId][0] == 1)
+	if(game.gameBoard.grid[nRowId][nCellId][0] == cellStatus.SHOWN)
 	{
 		console.log("Cell already clicked.");
 	}
-	else if(game.gameBoard.grid[nRowId][nCellId][1] == 1)
+	else if(game.gameBoard.grid[nRowId][nCellId][1] == cellStatus.MINE)
 	{
-		game.gameBoard.grid[nRowId][nCellId][0] = 1;
+		game.gameBoard.grid[nRowId][nCellId][0] = cellStatus.SHOWN;
 		cellDiv.classList.add("mine");
+		gameOver();
 	}
-	else if(game.gameBoard.grid[nRowId][nCellId][1] == 0)
+	else if(game.gameBoard.grid[nRowId][nCellId][1] == cellStatus.SAFE)
 	{
-		game.gameBoard.grid[nRowId][nCellId][0] = 1;
+		game.gameBoard.grid[nRowId][nCellId][0] = cellStatus.SHOWN;
+
+		//reveals nearby squares if square has no mines around it
+		/*if(game.gameBoard.grid[nRowId][nCellId][2] == 0)
+		{
+			revealNearbyCells(nRowId, nCellId);
+		}*/
 		cellDiv.classList.add("safe");
 		cellDiv.appendChild(node);
 	}
@@ -34,7 +80,6 @@ function setUpEvents()
 {
 	$(".cell").on("click", function(e)
 	{
-		testFunction();
 		var myparent = $(e.target).parent();
 		var rowId = myparent.attr("id");
 		var cellId = e.target.id;
@@ -235,6 +280,10 @@ function changeDifficulty(level)
         game.nMines = 100;
 		console.log("Difficulty = Hard");
 	}
+	if(document.getElementById("gameOverText") != null)
+	{
+		document.getElementById("gameOverText").innerHTML = "";
+	}
 	populateGameBoard();
 }
 
@@ -249,39 +298,3 @@ var cellStatus =
 	SHOWN : 1
 };
 
-function testFunction()
-{
-	console.log("testFunction entered");
-	
-	if(a == 0)
-	{
-		document.getElementById("heading").style.color = "#FF0000";
-		a = 1;
-	}
-	else
-	{
-		document.getElementById("heading").style.color = "#00FF00";
-		a = 0;
-	}
-	
-}
-
-//Changes value of flag count
-function changeFlagCount(x)
-{
-    if((game.nFlags > 0) && (game.nFlags < 100))
-    {
-        game.nFlags += x;
-        document.getElementById("nFlags").innerHTML = "Number of flags: " + game.nFlags;
-    }
-    else if((game.nFlags == 100) && (x == -1))
-    {
-        game.nFlags += x;
-        document.getElementById("nFlags").innerHTML = "Number of flags: " + game.nFlags;
-    }
-    else if((game.nFlags == 0) && (x == 1))
-    {
-        game.nFlags += x;
-        document.getElementById("nFlags").innerHTML = "Number of flags: " + game.nFlags;
-    }
-}
