@@ -104,6 +104,7 @@ function renderGameBoard()
 
 function gameOver()
 {
+	document.getElementById("gameOverDiv").innerHTML = "Too bad! You clicked a mine.  Click a difficulty above to start a new game.";
 	document.getElementById("gameOverDiv").classList.add("active");
 
 	for(var row = 0; row < game.gameBoard.height; row++)
