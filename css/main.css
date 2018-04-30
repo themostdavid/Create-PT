@@ -7,6 +7,14 @@
     font-size: 72px;
 }
 
+#desc
+{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto; 
+    width: 50%;
+}
+
 body > p
 {
 	text-align: center;
@@ -26,14 +34,27 @@ body > p
 .cell
 {
     display: inline-block;
+    color: rgb(0, 112, 187);
     position: relative;
     width: 20px;
     height: 20px;
     margin-left: 5px;
-	margin-right: 5px;
-    margin-top: 0px;
-    background: #efefef;
+    margin-right: 5px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    background: #919191;
     box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.cell.revealed
+{
+    background: #e0e0e0;
+}
+
+.cell text
+{
+    margin: 0px;
 }
 
 #gameBoard
@@ -58,10 +79,28 @@ body > p
 
 #gameOverDiv
 {
+    position: absolute;
 	margin-left: auto;
     margin-right: auto;
-    width: 0px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    background: #dbdbdb;
+    padding: 15px 15px;
     text-align: center;
     margin-top: 5px;
     margin-bottom: 5px;
+    z-index: 3;
+    transition: all .5s linear;
+    opacity: 0;
+    border-radius: 3px;
+    visibility: hidden;
+}
+
+#gameOverDiv.active
+{
+    transform: translate(-50%, -50%) rotate(360deg);
+    opacity: 1;
+    visibility: visible;
 }
