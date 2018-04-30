@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
 
-    <body onload="populateGameBoard()">
+    <body>
 
     <h2 id="heading">Minesweeper!</h2>
 
@@ -13,17 +13,17 @@
         all mines on the play board. Left-clicking a square will reveal a
         number, indicating how many mines lie in the squares surrounding that
         square. Right-click a square to indicate you believe there is a mine there.
-        Flag all mines to win!
+        Reveal all safe squares to win!
     </p>
 
-    <p id="nFlags">Number of flags: 100</p>
+    <div id="gameOverDiv"><p id="gameOverText">Too bad! You clicked a mine.  Click a difficulty above to start a new game.</p></div>
+
+    <p id="nFlags">Number of flags: 99</p>
 	<div class="buttonHolder">
 		<button type="button" id="button" onclick="changeDifficulty(0)">Beginner</button>
         <button type="button" id="button" onclick="changeDifficulty(1)">Medium</button>
         <button type="button" id="button" onclick="changeDifficulty(2)">Hard</button>
 	</div>
-	
-    <p id="testArray">Output is: </p>
     
     <div id="gameBoard"></div>
 
