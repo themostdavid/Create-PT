@@ -164,8 +164,6 @@ function revealCell(rowId, cellId)
 {
 	var nRowId = parseInt(rowId);
 	var nCellId = parseInt(cellId);
-	game.revealedCells++;
-	console.log("Revealed cells: " + game.revealedCells);
 
 	if(game.gameBoard.grid[nRowId][nCellId][0] == 1)
 	{
@@ -179,15 +177,16 @@ function revealCell(rowId, cellId)
 	else if(game.gameBoard.grid[nRowId][nCellId][1] == cellStatus.SAFE)
 	{
 		game.gameBoard.grid[nRowId][nCellId][0] = cellStatus.SHOWN;
-
+		game.revealedCells++;
+		console.log("Revealed cells: " + game.revealedCells);
 		//reveals nearby squares if square has no mines around it
 		if(game.gameBoard.grid[nRowId][nCellId][2] == 0)
 		{
 			revealNearbyCells(nRowId, nCellId);
 		}
-		checkGameWin();
+		
 	}
-	
+	checkGameWin();
 }
 
 function putFlagDown(rowId, cellId)
