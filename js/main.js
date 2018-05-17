@@ -185,8 +185,9 @@ function revealCell(rowId, cellId)
 		{
 			revealNearbyCells(nRowId, nCellId);
 		}
+		checkGameWin();
 	}
-	checkGameWin();
+	
 }
 
 function putFlagDown(rowId, cellId)
