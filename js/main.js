@@ -119,6 +119,7 @@ function gameOver()
 			}	
 		}
 	}
+	cancelAnimationFrame(renderGameBoard);
 }
 
 function checkGameWin()
@@ -132,6 +133,7 @@ function checkGameWin()
 		document.getElementById("gameOverDiv").classList.add("active");
 		document.getElementById("gameOverDiv").innerHTML = "You won!  Great job.  Click a difficulty above to start a new game."
 	}
+	cancelAnimationFrame(renderGameBoard);
 }
 
 //Reveals nearby squares
@@ -327,6 +329,7 @@ function formatGameBoard()
 //Creates html board
 function populateGameBoard()
 {
+	
 	console.log("populateGameBoard entered");
 	game.gameBoard.createBoard();
 	
@@ -359,6 +362,7 @@ function populateGameBoard()
 	formatGameBoard();
 	//jquery event handlers for cells
 	setUpEvents();
+	renderGameBoard();
 }
 
 function changeDifficulty(level)
@@ -415,5 +419,5 @@ function changeFlagCount(x)
 
 $(function() {
 	populateGameBoard();
-	renderGameBoard();
+	
 });
