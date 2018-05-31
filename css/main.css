@@ -79,17 +79,15 @@ body > p
 
 #gameOverDiv
 {
-    position: absolute;
+    position: relative;
 	margin-left: auto;
     margin-right: auto;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
+    width: 250px;
     background: #dbdbdb;
     padding: 15px 15px;
+	font-size: 18px;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 90px;
     margin-bottom: 5px;
     z-index: 3;
     transition: all .5s linear;
@@ -100,7 +98,6 @@ body > p
 
 #gameOverDiv.active
 {
-    transform: translate(-50%, -50%) rotate(360deg);
     opacity: 1;
     visibility: visible;
 }
