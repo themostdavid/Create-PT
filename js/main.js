@@ -166,7 +166,12 @@ function revealCell(rowId, cellId)
 {
 	var nRowId = parseInt(rowId);
 	var nCellId = parseInt(cellId);
-
+	
+	if(game.gameBoard.grid[nRowId][nCellId][1] == cellStatus.FLAGGED)
+	{
+		changeFlagCount(1);
+	}
+	
 	if(game.gameBoard.grid[nRowId][nCellId][0] == 1)
 	{
 		console.log("Cell already clicked.");
