@@ -303,8 +303,8 @@ function setUpCells()
 	while(placeholder != 0)
 	{
 		console.log("loop entered");
-		randomRow = Math.floor(Math.random() * (game.gameBoard.height-1));
-		randomCell = Math.floor(Math.random() * (game.gameBoard.width-1));
+		randomRow = Math.floor(Math.random() * (game.gameBoard.height));
+		randomCell = Math.floor(Math.random() * (game.gameBoard.width));
 		
 		if(game.gameBoard.grid[randomRow][randomCell][1] != 1) 
 		{
