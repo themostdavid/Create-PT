@@ -167,7 +167,7 @@ function revealCell(rowId, cellId)
 	var nRowId = parseInt(rowId);
 	var nCellId = parseInt(cellId);
 	
-	if(game.gameBoard.grid[nRowId][nCellId][1] == cellStatus.FLAGGED)
+	if(game.gameBoard.grid[nRowId][nCellId][0] == cellStatus.FLAGGED)
 	{
 		changeFlagCount(1);
 	}
