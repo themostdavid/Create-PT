@@ -56,7 +56,7 @@ var cellStatus =
     //0 means hidden, 1 means revealed
 	HIDDEN : 0,
 	SHOWN : 1,
-	FLAG: 2
+	FLAGGED: 2
 };
 
 function renderGameBoard()
