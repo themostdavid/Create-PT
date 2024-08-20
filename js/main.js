@@ -40,7 +40,7 @@ var game =
 		}
     },
 
-    nFlags : 100,
+    nFlags : 99,
 
 	nMines: 99,
 	
