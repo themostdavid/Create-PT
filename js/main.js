@@ -42,7 +42,7 @@ var game =
 
     nFlags : 99,
 
-	nMines: 99,
+	nMines: 100,
 	
 	revealedCells: 0
 };
